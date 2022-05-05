@@ -33,7 +33,7 @@ const UserController = {
         passport.authenticate('local', {
             successRedirect: '/homepage',
             failureRedirect: '/login',
-            // failureFlash: true
+            failureFlash: true
           })(req, res, next);
         
     }
