@@ -11,21 +11,61 @@ const UserController = {
     },
 
     createUser(req,res){
-        try{
-            const newUser = new User({
-                email: req.body.email,
-                password: req.body.password
+        const { email, password} = req.body;
+        let errors = [];
+
+        if ( !email || !password) {
+            errors.push({ msg: 'Please enter all fields' });
+          }
+        
+          
+        
+          if (password.length < 6) {
+            errors.push({ msg: 'Password must be at least 6 characters' });
+          }
+        
+          if (errors.length > 0) {
+            res.render('register', {
+              errors,
+             
+              email,
+              password,
+            });
+
+            } else {
+                    User.findOne({email: req.body.email}).then(user => {
+                if(user){
+                    errors.push({ msg: 'Email already exists' });
+                    res.render('register', {
+                        errors,
+                       
+                        email,
+                        password,
+                      });
+                    
+                } else {
+                    const newUser = new User({
+                        
+                        email: req.body.email,
+                        password: req.body.password
+                    })
+                  
+                
+                            newUser.save().then(results => {
+                                req.flash(
+                                    'success_msg',
+                                    'You are now registered and can log in'
+                                  );
+                                res.redirect('/login')
+                             })
+         
+                }
             })
+                }
 
+                
 
-            newUser.save().then(results => {
-                // flash u are creted go to login 
-                res.redirect('/login');
-            })
-
-        } catch (error) {
-            console.log(error);
-        }
+        
     },
 
     //login 
