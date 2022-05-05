@@ -3,17 +3,28 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const db = require('./db/connection');
 const routes = require('./routes');
-
-
+const passport = require('passport');
+const session = require('express-session');
 app.set('view engine', 'ejs');
-
+require('./config/passport')(passport);
 
 // **Middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('./public'))
 
+// express session 
+app.use(
+    session({
+        secret: 'secret',
+        resave: true,
+        saveUninitialized: true
+    })
+);
 
+// passport middleware 
+app.use(passport.initialize());
+app.use(passport.session());
 //Routes
 app.use(routes);
 

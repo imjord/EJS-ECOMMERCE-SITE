@@ -1,2 +1,9 @@
 <%- include('./partials/Head.ejs')  %> 
     register here
+    <form action="/create" method="POST">
+        <label for="email"></label>
+        <input name="email" type="text" id="email"/><br>
+        <label for="password"></label>
+        <input name="password" type="password" id="password"/><br>
+        <button type="submit">Create Account</button>
+    </form>

@@ -1,2 +1,9 @@
 <%- include('./partials/Head.ejs')  %> 
 login here
+<form action="/login" method="POST">
+    <label for="email"></label>
+    <input name="email" type="text" id="email"/><br>
+    <label for="password"></label>
+    <input name="password" type="password" id="password"/><br>
+    <button type="submit">Login </button>
+</form>
