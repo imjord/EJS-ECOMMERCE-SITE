@@ -15,13 +15,13 @@ const UserController = {
         let errors = [];
 
         if ( !email || !password) {
-            errors.push({ msg: 'Please enter all fields' });
+            errors.push({ msg: 'All fields are required' });
           }
         
           
         
           if (password.length < 6) {
-            errors.push({ msg: 'Password must be at least 6 characters' });
+            errors.push({ msg: 'Password must be atleast 6 characters' });
           }
         
           if (errors.length > 0) {
@@ -35,7 +35,7 @@ const UserController = {
             } else {
                     User.findOne({email: req.body.email}).then(user => {
                 if(user){
-                    errors.push({ msg: 'Email already exists' });
+                    errors.push({ msg: 'Email already in use.' });
                     res.render('register', {
                         errors,
                        
@@ -54,7 +54,7 @@ const UserController = {
                             newUser.save().then(results => {
                                 req.flash(
                                     'success_msg',
-                                    'You are now registered and can log in'
+                                    'Congrats! Your account is created and you can now log in!'
                                   );
                                 res.redirect('/login')
                              })

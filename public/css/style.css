@@ -6,3 +6,11 @@
     font-family: 'PT Sans', sans-serif;
 
 }
+
+.error {
+    background-color: rgba(210, 67, 67, 0.8);
+}
+
+.success {
+    background-color: rgba(74, 242, 121, 0.8);
+}

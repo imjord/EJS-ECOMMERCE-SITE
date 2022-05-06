@@ -9,16 +9,19 @@ mongoose.connect('mongodb://localhost/ejsecom').then(() => {
 
 const seedProducts = [
     {
+        image: '/assets/doom.jpg',
         name: 'Doom',
         price: 10,
         category: 'FPS'
     },
     {
+        image: '/assets/mario.jpg',
         name: 'Mario',
         price: 10,
         category: 'Platformer'
     },
     {
+        image: '/assets/pokemon.png',
         name: 'Pokemon',
         price: 10,
         category: 'RPG'

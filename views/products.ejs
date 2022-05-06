@@ -1,0 +1,19 @@
+<%- include('./partials/Head.ejs')  %> 
+<%- include('./partials/nav.ejs')  %> 
+<% results.forEach(products => { %> 
+    <div class="products">
+        <img src="<%=products.image%>" />
+        <p>
+            Game: <%= products.name  %> 
+        </p>
+        <p>
+           Price: $<%= products.price  %> 
+        </p>
+        <p>
+           Category: <%= products.category  %> 
+        </p>
+        <a href="/add-to-cart/<%=products.id%> "> <button> Add to cart </button></a>
+    </div>
+    
+
+<% }) %> 

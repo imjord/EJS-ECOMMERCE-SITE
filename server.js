@@ -6,6 +6,7 @@ const routes = require('./routes');
 const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
+const MongoStore = require('connect-mongo')(session);
 
 app.set('view engine', 'ejs');
 require('./config/passport')(passport);
@@ -19,8 +20,10 @@ app.use(express.static('./public'))
 app.use(
     session({
         secret: 'secret',
-        resave: true,
-        saveUninitialized: true
+        resave: false,
+        saveUninitialized: false,
+        store: new MongoStore({mongooseConnection: db}),
+        cookie: { maxAge: 120 * 60 * 100}
     })
 );
 
@@ -41,6 +44,11 @@ app.use(function(req, res, next) {
     next();
   });
 
+
+app.use((req,res,next) => {
+    res.locals.session = req.session;
+    next();
+})
 
 //Routes
 app.use(routes);
